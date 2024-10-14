@@ -1,0 +1,16 @@
+<svg viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fundo circular -->
+  <circle cx="64" cy="64" r="64" fill="#2F3242"/>
+  
+  <!-- Desenho de um ícone de NF-e -->
+  <rect x="20" y="24" width="40" height="60" rx="5" ry="5" fill="#0066CC"/>
+  <text x="40" y="55" text-anchor="middle" font-family="Arial" font-size="12" fill="white">NF-e</text>
+
+  <!-- Seta para conversão -->
+  <polygon points="70,55 85,60 70,65" fill="#fff"/>
+  <line x1="60" y1="60" x2="80" y2="60" stroke="#fff" stroke-width="2"/>
+
+  <!-- Desenho de um ícone de Excel -->
+  <rect x="90" y="44" width="30" height="30" rx="5" ry="5" fill="#1D6F42"/>
+  <text x="105" y="64" text-anchor="middle" font-family="Arial" font-size="12" fill="white">X</text>
+</svg>
