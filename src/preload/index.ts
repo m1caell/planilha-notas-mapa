@@ -5,22 +5,28 @@ export interface FilePathState {
   sheetName: string
   nfeFilePath: string
   xlsxFilePath: string
+  nfeDirectory: string
 }
 
 interface ConvertCsvToXlsxResponse {
   success: boolean
   xlsxFilePath?: string
   error?: string
+  nfeErrors: string[]
 }
 
 export interface Api {
   convertTextToXlsx(filePath: FilePathState): Promise<ConvertCsvToXlsxResponse>
+  selectFolder(): Promise<string | null>
 }
 
 // Custom APIs for renderer
 const api = {
   convertTextToXlsx: (filePath: FilePathState): Promise<ConvertCsvToXlsxResponse> => {
     return ipcRenderer.invoke('convert-text-to-xlsx', filePath)
+  },
+  selectFolder: (): Promise<string | null> => {
+    return ipcRenderer.invoke('select-folder')
   }
 }
 

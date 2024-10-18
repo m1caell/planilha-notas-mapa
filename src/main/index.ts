@@ -3,12 +3,13 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { convertTextToXlsx } from './convert-text-to-xlsx'
+import { selectFolder } from './select-folder'
 
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 900,
-    height: 670,
+    width: 1024,
+    height: 768,
     show: false,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
@@ -52,6 +53,7 @@ app.whenReady().then(() => {
   })
 
   ipcMain.handle('convert-text-to-xlsx', convertTextToXlsx)
+  ipcMain.handle('select-folder', selectFolder)
 
   createWindow()
 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 type InputFileProps = {
   label: string
@@ -18,6 +18,13 @@ export function InputFile({
   selectedFile
 }: InputFileProps): JSX.Element {
   const [isDragging, setIsDragging] = useState(false)
+  const ref = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (selectedFile === '' && ref.current) {
+      ref.current.value = ''
+    }
+  }, [selectedFile, ref])
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>): void => {
     event.preventDefault()
@@ -57,6 +64,7 @@ export function InputFile({
       >
         <p className="mb-2">Arraste ou clique no botão de busca</p>
         <input
+          ref={ref}
           className="hidden"
           id={`${name}-id`}
           name={name}
