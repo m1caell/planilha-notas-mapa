@@ -1,7 +1,7 @@
 function Versions(): JSX.Element {
   return (
     <ul className="versions">
-      <li className="electron-version">Software v1.0.0</li>
+      <li className="electron-version">Software v1.1.0</li>
     </ul>
   )
 }

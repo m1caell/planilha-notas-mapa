@@ -22,7 +22,7 @@ function App(): JSX.Element {
 
   const handleConvert = async (): Promise<void> => {
     if (!filePath.nfeFilePath) {
-      alert('Você deve selecionar um arquivo Nfe válido.')
+      alert('Você deve digitar um arquivo NF-e.')
       return
     }
 
@@ -74,79 +74,108 @@ function App(): JSX.Element {
   }
 
   return (
-    <main className="w-screen h-screen px-5 py-4 overflow-y-scroll">
-      <h1 className="text-4xl mb-8 text-center">Planilha Notas Mapa</h1>
+    <div className="w-screen h-screen flex justify-center overflow-y-scroll">
+      <main className="px-5 py-4 max-w-[1200px]">
+        <h1 className="text-4xl mb-8 text-center">Planilha Notas Mapa</h1>
 
-      <section className="flex justify-between gap-5">
-        <aside className="flex-1">
-          <Input
-            label="Nome aba"
-            name="sheetName"
-            onChange={(e) => setFilePath((prev) => ({ ...prev, sheetName: e.target.value }))}
-            className="mb-2"
-            placeholder="Ex.: Janeiro - 2024"
-            value={filePath.sheetName}
-          />
+        <section className="flex justify-between gap-8 pb-5">
+          <aside className="flex-1">
+            <Input
+              label="Aba"
+              name="sheetName"
+              onChange={(e) => setFilePath((prev) => ({ ...prev, sheetName: e.target.value }))}
+              className="mb-6"
+              placeholder="Ex.: Janeiro - 2024"
+              value={filePath.sheetName}
+            />
 
-          <InputFile
-            label="Nfe"
-            name="nfeFilePath"
-            acceptFiles=".txt,.csv"
-            onChange={(file) => handleFileChange('nfeFilePath', file)}
-            className="mb-2"
-            selectedFile={filePath.nfeFilePath}
-          />
+            <InputFile
+              label="NF-e"
+              name="nfeFilePath"
+              acceptFiles=".txt,.csv"
+              onChange={(file) => handleFileChange('nfeFilePath', file)}
+              className="mb-2"
+              selectedFile={filePath.nfeFilePath}
+            />
 
-          <InputFile
-            label="Excel"
-            name="xlsxFilePath"
-            acceptFiles=".xlsx,.xls"
-            onChange={(file) => handleFileChange('xlsxFilePath', file)}
-            className="mb-4"
-            selectedFile={filePath.xlsxFilePath}
-          />
+            <InputFile
+              label="Excel"
+              name="xlsxFilePath"
+              acceptFiles=".xlsx,.xls"
+              onChange={(file) => handleFileChange('xlsxFilePath', file)}
+              className="mb-4"
+              selectedFile={filePath.xlsxFilePath}
+            />
 
-          <div>
-            <Button onClick={handleSelectFolder} className="w-full">
-              Selecionar diretório de notas fiscais
+            <div className="relative pb-6">
+              <Button onClick={handleSelectFolder} className="w-full">
+                Selecionar diretório de notas fiscais
+              </Button>
+              {filePath.nfeDirectory && (
+                <p
+                  title={filePath.nfeDirectory}
+                  className="mt-2 text-sm text-gray-400 absolute bottom-0 w-full whitespace-nowrap text-ellipsis overflow-hidden"
+                >
+                  <strong>Arquivo:</strong> {filePath.nfeDirectory}
+                </p>
+              )}
+            </div>
+          </aside>
+          <aside className="flex-1">
+            <h2 className="text-lg">
+              <strong>Tutorial</strong>
+            </h2>
+            <p>
+              Esse programa tem por objetivo converter arquivos de texto (txt, csv) em um arquivo
+              Excel, abaixo segue explicação de cada campo do formulário que deve ser preenchido.
+            </p>
+
+            <p>
+              <strong>Nome: </strong>
+              <span>
+                esse campo é obrigatório e ele vai dar nome ao Excel após o processamento.
+              </span>
+            </p>
+            <p>
+              <strong>Aba: </strong>
+              <span>
+                esse campo é obrigatório e ele vai dar nome a nova aba dentro do arquivo Excel.
+              </span>
+            </p>
+            <p>
+              <strong>NF-e: </strong>
+              <span>
+                esse campo é obrigatório e ele deve ser um arquivo de texto (txt, csv) que contém os
+                números das notas fiscais.
+              </span>
+            </p>
+            <p>
+              <strong>Excel: </strong>
+              <span>
+                esse campo é opcional, caso seja preenchido o arquivo Excel selecionado será
+                editado, caso não seja preenchido será criado um novo arquivo Excel. Outro ponto
+                importante aqui é cuidar para esse arquivo não estar aberto em outro programa.
+              </span>
+            </p>
+            <p className="mb-14">
+              <strong>Diretório de notas fiscais: </strong>
+              <span>
+                esse campo é opcional, quando selecionado a pasta o programa vai tentar filtrar pelo
+                nome da nota fiscal
+              </span>
+            </p>
+
+            <Button onClick={handleConvert} className="w-full bg-purple-600">
+              Processar
             </Button>
-            {filePath.nfeDirectory && (
-              <p className="mt-2 text-sm text-gray-700">
-                <strong>Arquivo:</strong> {filePath.nfeDirectory}
-              </p>
-            )}
-          </div>
-        </aside>
-        <aside className="flex-1 pt-8">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis doloremque et ipsam
-            saepe nobis, ut, expedita quod reiciendis deserunt id numquam corrupti quibusdam minima.
-            Officiis molestias eos minus quibusdam odio.
-          </p>
+          </aside>
+        </section>
 
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis doloremque et ipsam
-            saepe nobis, ut, expedita quod reiciendis deserunt id numquam corrupti quibusdam minima.
-            Officiis molestias eos minus quibusdam odio.
-          </p>
-
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis doloremque et ipsam
-            saepe nobis, ut, expedita quod reiciendis deserunt id numquam corrupti quibusdam minima.
-            Officiis molestias eos minus quibusdam odio.
-          </p>
-        </aside>
-      </section>
-      <section className="mt-8 flex justify-center">
-        <Button onClick={handleConvert} className="w-fit bg-purple-600">
-          Processar
-        </Button>
-      </section>
-
-      <footer className="flex justify-end">
-        <Versions></Versions>
-      </footer>
-    </main>
+        <footer className="flex justify-center">
+          <Versions></Versions>
+        </footer>
+      </main>
+    </div>
   )
 }
 

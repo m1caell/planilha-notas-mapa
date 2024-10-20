@@ -52,7 +52,7 @@ export function InputFile({
   }
 
   return (
-    <div className={`flex flex-col cursor-pointer ${className}`}>
+    <div className={`flex flex-col cursor-pointer ${className} relative pb-6`}>
       <label className="mb-2 text-xl" htmlFor={`${name}-id`}>
         {label}
       </label>
@@ -90,9 +90,12 @@ export function InputFile({
         </label>
       </div>
       {selectedFile && (
-        <p className="mt-2 text-sm text-gray-700">
+        <div
+          title={selectedFile}
+          className="mt-2 text-sm text-gray-400 absolute bottom-0 w-full whitespace-nowrap text-ellipsis overflow-hidden"
+        >
           <strong>Arquivo:</strong> {selectedFile}
-        </p>
+        </div>
       )}
     </div>
   )
