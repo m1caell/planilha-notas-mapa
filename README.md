@@ -6,6 +6,8 @@ An Electron application with React and TypeScript
 
 This project is an Electron application built with React and TypeScript. It provides a modern desktop application experience with the power of web technologies.
 
+![Minha Imagem](./src/renderer/src/assets/Screenshot%202024-10-20%20at%2001.44.15.png)
+
 ## Recommended IDE Setup
 
 - [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
