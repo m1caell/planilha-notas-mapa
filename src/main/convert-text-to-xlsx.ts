@@ -65,6 +65,8 @@ function editXlsxFile(
 ): void {
   const newWorksheet = xlsx.utils.aoa_to_sheet(csvData.map((row) => row.split(';')))
 
+  autoAdjustColumnWidth(newWorksheet, csvData)
+
   xlsx.utils.book_append_sheet(workbook, newWorksheet, sheetName)
   xlsx.writeFile(workbook, xlsxFilePath)
 }
@@ -76,6 +78,8 @@ async function createNewXlsxFile(
 ): Promise<void> {
   const newWorkbook = xlsx.utils.book_new()
   const worksheet = xlsx.utils.aoa_to_sheet(csvData.map((row) => row.split(';')))
+
+  autoAdjustColumnWidth(worksheet, csvData)
 
   xlsx.utils.book_append_sheet(newWorkbook, worksheet, sheetName)
   xlsx.writeFile(newWorkbook, xlsxFilePath)
@@ -117,4 +121,12 @@ async function filterNfeFilesFromFolder(
   csvDataFiltered.unshift(firstRow)
 
   return { csvData: csvDataFiltered, nfeErrors }
+}
+
+function autoAdjustColumnWidth(worksheet: xlsx.WorkSheet, csvData: string[]): void {
+  const colWidths = csvData[0].split(';').map((_, colIndex) => {
+    return Math.max(...csvData.map((row) => row.split(';')[colIndex]?.length || 10), 10)
+  })
+
+  worksheet['!cols'] = colWidths.map((width) => ({ wch: width }))
 }

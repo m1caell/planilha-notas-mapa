@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: transpile-file
+productName: planilha-notas-mapa
 directories:
   buildResources: build
 files:
@@ -12,7 +12,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: transpile-file
+  executableName: Planilha Notas Mapa
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
