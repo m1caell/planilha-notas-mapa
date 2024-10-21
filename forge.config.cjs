@@ -14,7 +14,16 @@ module.exports = {
   },
   makers: [
     {
-      name: '@electron-forge/maker-squirrel'
+      name: '@electron-forge/maker-squirrel',
+      config: {
+        name: 'PlanilhaNotasMapa',
+        // setupIcon: './path/to/icon.ico', // Opcional: ícone do instalador
+        shortcutName: 'Planilha Notas Mapa', // Nome do atalho criado
+        // Cria atalho na área de trabalho e no menu iniciar
+        createDesktopShortcut: true,
+        createStartMenuShortcut: true,
+        shortcutFolder: 'Planilha Notas Mapa' // Nome da pasta no menu iniciar
+      }
     },
     {
       name: '@electron-forge/maker-zip',
